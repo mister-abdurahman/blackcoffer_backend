@@ -6,8 +6,7 @@ const MONGODB_URL = process.env.MONGODB_URL;
 // connect to mongodb
 function connectToMongoDB() {
   mongoose.connect(MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    connectTimeoutMS: 80000,
   });
   mongoose.connection.on("connected", () => {
     console.log("Connected to MongoDB successfully");
