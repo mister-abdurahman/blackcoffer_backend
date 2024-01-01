@@ -1,6 +1,7 @@
 const express = require("express");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
+const cors = require("cors");
 
 const app = express();
 
@@ -11,6 +12,7 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(limiter);
