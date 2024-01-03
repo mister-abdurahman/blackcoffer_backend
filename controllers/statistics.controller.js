@@ -50,22 +50,11 @@ async function getRelevance(req, res, next) {
   }
 }
 
-async function getYear(req, res, next) {
-  try {
-    const data = await StatisticsModel.find()
-      .select("added relevance")
-      .limit(20);
-
-    res.status(200).json(data);
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-}
-
 async function getCountry(req, res, next) {
   try {
-    const data = await StatisticsModel.find()
+    const data = await StatisticsModel.find({
+      country: { $exists: true, $ne: "" },
+    })
       .select("country intensity")
       .limit(20);
 
@@ -78,7 +67,9 @@ async function getCountry(req, res, next) {
 
 async function getTopics(req, res, next) {
   try {
-    const data = await StatisticsModel.find()
+    const data = await StatisticsModel.find({
+      topic: { $exists: true, $ne: "" },
+    })
       .select("topic relevance")
       .limit(20);
 
@@ -91,7 +82,9 @@ async function getTopics(req, res, next) {
 
 async function getRegion(req, res, next) {
   try {
-    const data = await StatisticsModel.find()
+    const data = await StatisticsModel.find({
+      region: { $exists: true, $ne: "" },
+    })
       .select("region intensity")
       .limit(20);
 
@@ -102,10 +95,57 @@ async function getRegion(req, res, next) {
   }
 }
 
-async function getCity(req, res, next) {
+async function getEndYear(req, res, next) {
   try {
-    const data = await StatisticsModel.find()
-      .select("intensity published")
+    const data = await StatisticsModel.find({
+      end_year: { $exists: true, $ne: "" },
+    })
+      .select("end_year intensity")
+      .limit(20);
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+async function getSector(req, res, next) {
+  try {
+    const data = await StatisticsModel.find({
+      sector: { $exists: true, $ne: "" },
+    })
+      .select("sector intensity")
+      .limit(20);
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+async function getPestle(req, res, next) {
+  try {
+    const data = await StatisticsModel.find({
+      pestle: { $exists: true, $ne: "" },
+    })
+      .select("pestle relevance")
+      .limit(20);
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+async function getSource(req, res, next) {
+  try {
+    const data = await StatisticsModel.find({
+      source: { $exists: true, $ne: "" },
+    })
+      .select("source relevance")
       .limit(20);
 
     res.status(200).json(data);
@@ -118,11 +158,13 @@ async function getCity(req, res, next) {
 module.exports = {
   getStatistics,
   getIntensity,
-  getCity,
   getCountry,
   getLikelihood,
   getRegion,
   getRelevance,
   getTopics,
-  getYear,
+  getEndYear,
+  getSector,
+  getPestle,
+  getSource,
 };
