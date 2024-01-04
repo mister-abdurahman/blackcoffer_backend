@@ -13,7 +13,9 @@ async function getStatistics(req, res, next) {
 
 async function getIntensity(req, res, next) {
   try {
-    const data = await StatisticsModel.find()
+    const data = await StatisticsModel.find({
+      published: { $exists: true, $ne: "" },
+    })
       .select("intensity published")
       .limit(20);
 
@@ -26,7 +28,9 @@ async function getIntensity(req, res, next) {
 
 async function getLikelihood(req, res, next) {
   try {
-    const data = await StatisticsModel.find()
+    const data = await StatisticsModel.find({
+      published: { $exists: true, $ne: "" },
+    })
       .select("likelihood published")
       .limit(20);
 
@@ -39,7 +43,9 @@ async function getLikelihood(req, res, next) {
 
 async function getRelevance(req, res, next) {
   try {
-    const data = await StatisticsModel.find()
+    const data = await StatisticsModel.find({
+      published: { $exists: true, $ne: "" },
+    })
       .select("relevance published")
       .limit(20);
 
