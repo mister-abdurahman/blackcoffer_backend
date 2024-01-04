@@ -121,7 +121,7 @@ async function getSector(req, res, next) {
     const data = await StatisticsModel.find({
       sector: { $exists: true, $ne: "" },
     })
-      .select("sector intensity")
+      .select("sector relevance")
       .limit(20);
 
     res.status(200).json(data);
