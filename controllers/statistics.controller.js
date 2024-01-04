@@ -61,7 +61,7 @@ async function getCountry(req, res, next) {
     const data = await StatisticsModel.find({
       country: { $exists: true, $ne: "" },
     })
-      .select("country intensity")
+      .select("country intensity likelihood")
       .limit(20);
 
     res.status(200).json(data);
@@ -151,7 +151,7 @@ async function getSource(req, res, next) {
     const data = await StatisticsModel.find({
       source: { $exists: true, $ne: "" },
     })
-      .select("source relevance")
+      .select("source intensity relevance")
       .limit(20);
 
     res.status(200).json(data);
